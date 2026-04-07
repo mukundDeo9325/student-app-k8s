@@ -16,11 +16,11 @@ docker --version
 ### Create Docker Image and Push to DockerHub
 
 ````
-docker build -t abhipraydh96/backend .
+docker build -t mukundDeo9325/backend .
 ````
 
 ````
-docker push abhipraydh96/backend
+docker push mukundDeo9325/backend
 ````
 ---
 
