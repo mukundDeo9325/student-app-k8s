@@ -196,10 +196,10 @@ pipeline {
 
 ```groovy
 pipeline {
-    agent any
+    agent { label 'eksagent' }
 
     environment {
-        AWS_DEFAULT_REGION = 'ap-south-1'
+        AWS_DEFAULT_REGION = 'ap-northeast-1'
     }
 
     stages {
@@ -224,14 +224,16 @@ pipeline {
 
                     sh '''
                     aws eks update-kubeconfig \
-                    --region ap-south-1 \
+                    --region ap-northeast-1 \
                     --name EKS_CLOUD
 
                     kubectl get nodes
 
-                    kubectl apply -f backend.yaml ./backend
-
-                    kubectl apply -f frontend.yaml ./frontend
+                    cd backend
+                    kubectl apply -f backend.yaml
+                    cd ../frontend 
+                    kubectl apply -f frontend.yaml
+                    cd ..
 
                     kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
 
